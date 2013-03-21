@@ -1,4 +1,4 @@
-# riak_cs_create_admin_user
+# riak-cs-create-admin-user
 
 ## Description
 
@@ -14,7 +14,7 @@ Creates and configures an administrator for Riak CS.
 ### Cookbooks
 
 * riak
-* riak_cs
+* riak-cs
 
 ## Attributes
 
@@ -24,9 +24,9 @@ Creates and configures an administrator for Riak CS.
 
 ## Recipes
 
-* `recipe[riak_cs_create_admin_user]` will configure an administrator for Riak CS.
+* `recipe[riak-cs-create-admin-user]` will configure an administrator for Riak CS.
 
 ## Usage
 
-Ensure that the `riak_cs_create_admin_user` recipe is added after `riak`,
-`riak_cs`, and `stanchion` in the run list.
+Ensure that the `riak-cs-create-admin-user` recipe is added after `riak`,
+`riak-cs`, and `stanchion` in the run list.
