@@ -3,7 +3,7 @@ maintainer        "Hector Castro"
 maintainer_email  "hectcastro@gmail.com"
 license           "Apache 2.0"
 description       "Creates and configures an administrator for Riak CS."
-version           "0.1.0"
+version           "0.2.0"
 recipe            "riak-cs-create-admin-user", "Configures an administrator for Riak CS"
 
 %w{riak riak-cs}.each do |d|
