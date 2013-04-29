@@ -20,6 +20,9 @@ ruby_block "create-admin-user" do
     Chef::Log.info "Riak CS Key: #{admin_key}"
     Chef::Log.info "Riak CS Secret: #{admin_secret}"
 
+    node.run_state["riak_cs_admin_key"] = admin_key
+    node.run_state["riak_cs_admin_secret"] = admin_secret
+
     riak_cs_config = node["riak_cs"]["config"].to_hash
     riak_cs_config = riak_cs_config.merge(
       "riak_cs" => riak_cs_config["riak_cs"].merge(
