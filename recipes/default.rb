@@ -14,7 +14,8 @@ ruby_block "create-admin-user" do
     admin_key, admin_secret = RiakCS.create_admin_user(
       node["riak_cs_create_admin_user"]["name"],
       node["riak_cs_create_admin_user"]["email"],
-      node["ipaddress"]
+      node["ipaddress"],
+      node["riak_cs_create_admin_user"]["ssl"]
     )
 
     Chef::Log.info "Riak CS Key: #{admin_key}"

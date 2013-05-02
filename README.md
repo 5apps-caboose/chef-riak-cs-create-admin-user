@@ -22,6 +22,8 @@ Creates and configures an administrator for Riak CS.
 * `node["riak_cs_create_admin_user"]["email"]` - Riak CS administrator e-mail
   address.
 * `node["riak_cs_create_admin_user"]["name"]` - Riak CS administrator name.
+* `node["riak_cs_create_admin_user"]["ssl"]` - Is Riak CS configured for SSL?
+  Defaults to `false`.
 
 ## Recipes
 
