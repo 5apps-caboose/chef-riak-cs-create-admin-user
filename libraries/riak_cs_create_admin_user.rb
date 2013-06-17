@@ -3,11 +3,10 @@ require "json"
 require "uri"
 
 module RiakCS
-  PORT = 8080
   USER_RESOURCE_PATH = "riak-cs/user"
 
-  def self.create_admin_user(name, email, ipaddress)
-    uri           = URI.parse("http://#{ipaddress}:#{PORT}/#{USER_RESOURCE_PATH}")
+  def self.create_admin_user(name, email, ipaddress, port)
+    uri           = URI.parse("http://#{ipaddress}:#{port}/#{USER_RESOURCE_PATH}")
     request       = Net::HTTP::Post.new(uri.request_uri, "Content-Type" => "application/json")
     request.body  = {
       "email" => email,
