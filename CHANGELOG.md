@@ -1,3 +1,8 @@
+## v0.3.1
+
+* Fixed user creation request so that it uses the IP and port Riak CS is
+  configured on.
+
 ## v0.3.0
 
 * Added conditional guards for existence Riak CS Control.
