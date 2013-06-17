@@ -14,7 +14,7 @@ ruby_block "create-admin-user" do
     admin_key, admin_secret = RiakCS.create_admin_user(
       node["riak_cs_create_admin_user"]["name"],
       node["riak_cs_create_admin_user"]["email"],
-      node["ipaddress"],
+      node["riak_cs"]["config"]["riak_cs"]["cs_ip"].gsub(/__string_/, ""),
       node["riak_cs"]["config"]["riak_cs"]["cs_port"]
     )
 
