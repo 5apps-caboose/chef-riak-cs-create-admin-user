@@ -9,6 +9,8 @@ ruby_block "trigger-delayed-restarts" do
   end
 end
 
+credentials_file = "#{node['riak']['data_dir']}/credentials.json"
+
 ruby_block "create-admin-user" do
   block do
     admin_key, admin_secret = RiakCS.create_admin_user(
@@ -18,11 +20,16 @@ ruby_block "create-admin-user" do
       node["riak_cs"]["config"]["riak_cs"]["cs_port"]
     )
 
-    Chef::Log.info "Riak CS Key: #{admin_key}"
-    Chef::Log.info "Riak CS Secret: #{admin_secret}"
-
-    node.run_state["riak_cs_admin_key"] = admin_key
-    node.run_state["riak_cs_admin_secret"] = admin_secret
+    if Chef::Config[:solo]
+      credentials_as_json = { :admin_key => admin_key,
+                              :admin_secret => admin_secret }.to_json
+      File.open(credentials_file, 'w+') do |f|
+        f.write credentials_as_json
+      end
+    else
+      node.run_state["riak_cs_admin_key"] = admin_key
+      node.run_state["riak_cs_admin_secret"] = admin_secret
+    end
 
     riak_cs_config = node["riak_cs"]["config"].to_hash
     riak_cs_config = riak_cs_config.merge(
@@ -69,5 +76,9 @@ ruby_block "create-admin-user" do
     notifies :create, "file[#{node['riak_cs_control']['package']['config_dir']}/app.config]", :immediately
   end
 
-  only_if { node["riak_cs"]["config"]["riak_cs"]["anonymous_user_creation"] }
+  if Chef::Config[:solo]
+    only_if { ! File.exist? credentials_file }
+  else
+    only_if { node["riak_cs"]["config"]["riak_cs"]["anonymous_user_creation"] }
+  end
 end
