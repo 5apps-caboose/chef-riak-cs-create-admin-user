@@ -21,8 +21,8 @@ ruby_block "create-admin-user" do
     )
 
     if Chef::Config[:solo]
-      credentials_as_json = { :admin_key => admin_key,
-                              :admin_secret => admin_secret }.to_json
+      credentials_as_json = { :key_id => admin_key,
+                              :key_secret => admin_secret }.to_json
       File.open(credentials_file, 'w+') do |f|
         f.write credentials_as_json
       end
